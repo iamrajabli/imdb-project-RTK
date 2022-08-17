@@ -1,0 +1,7 @@
+@import '../../style/style.scss';
+
+.search__notfound {
+    @include flex-center-center;
+    font-size: $font-2xl;
+    padding: $padding-xl 0;
+}

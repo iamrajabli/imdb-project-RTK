@@ -58,7 +58,7 @@
         }
     }
 
-    .search__finded {
+    .search__result {
         width: 100%;
         border: 1px solid $primary-bg-color;
         border-top: none;
@@ -70,82 +70,8 @@
         border-bottom-left-radius: 7px;
         border-bottom-right-radius: 7px;
 
-        .search__item {
-            @include flex-between-center();
-            padding: $padding-md;
-
-            img {
-                width: 200px;
-                height: 300px;
-                object-fit: cover;
-            }
-
-            .search__item-content {
-                width: 50%;
-
-                h2 {
-
-                    font: {
-                        size: $font-lg;
-                        weight: $weight-xl;
-                    }
-
-                    margin-bottom: $margin-md;
-                }
-
-                p {
-                    line-height: $line-lg
-                }
-
-            }
-
-            .search__item-control {
-                @include flex-between-center();
-                gap: $gap-lg;
-                .wishlist {
-                    color: red !important;
-                }
-                .fa-heart {
-                    font-size: $font-lg;
-                    color: $secondary-font-color;
-                    cursor: pointer;
-                    transition: all 200ms linear;
-                    font-size: $font-xl;
-
-                    &:hover {
-                        color: $secondary-font-color-hover;
-                    }
-                }
-
-                a {
-                    text-decoration: none;
-                    background-color: $primary-btn-color;
-                    outline: none;
-                    border: 1px solid $primary-btn-color;
-                    cursor: pointer;
-                    color: $tertiary-font-color;
-                    text-transform: uppercase;
-                    padding: $padding-sm $padding-md;
-                    border-radius: 7px;
-                    font-weight: $weight-lg;
-                    transition: all 200ms linear;
-
-                    &:hover {
-                        background-color: $primary-btn-color-hover;
-                        border: 1px solid $primary-btn-color-hover;
-
-                    }
-                }
-            }
-
-        }
     }
 
-    .search__notfound {
-        @include flex-center-center;
-        font-size: $font-2xl;
-        padding: $padding-xl 0;
-    }
 
     .popup {
         @include flex-between-center();
