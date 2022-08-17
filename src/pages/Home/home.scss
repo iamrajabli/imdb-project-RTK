@@ -1,0 +1,279 @@
+@import '../../style/style.scss';
+
+#search {
+    margin: $margin-xl 0 $margin-md 0;
+    min-height: 100vh;
+
+    .container {
+        padding: 0 $padding-md;
+        box-sizing: border-box;
+    }
+
+    .search__title {
+        margin: $margin-3xl 0;
+        text-align: center;
+        color: $tertiary-font-color;
+
+        font: {
+            size: $font-2xl;
+            weight: $weight-xl;
+        }
+    }
+
+    .search__container {
+        @include flex-between-center();
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+        position: relative;
+        width: 100%;
+        height: 50px;
+        background-color: $secondary-bg-color;
+        border: 1px solid $primary-bg-color;
+
+        input {
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            padding: $padding-md;
+        }
+
+        input,
+        input ::placeholder {
+            font: {
+                size: $font-size;
+                family: $primary-font-family;
+            }
+
+            color: $primary-font-color;
+        }
+
+        .fa-magnifying-glass {
+            position: absolute;
+            right: 16px;
+            font-size: $font-lg;
+            color: $primary-font-color;
+            cursor: pointer;
+        }
+    }
+
+    .search__finded {
+        width: 100%;
+        border: 1px solid $primary-bg-color;
+        border-top: none;
+        margin-bottom: $margin-3xl;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        gap: $gap-lg;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+
+        .search__item {
+            @include flex-between-center();
+            padding: $padding-md;
+
+            img {
+                width: 200px;
+                height: 300px;
+                object-fit: cover;
+            }
+
+            .search__item-content {
+                width: 50%;
+
+                h2 {
+
+                    font: {
+                        size: $font-lg;
+                        weight: $weight-xl;
+                    }
+
+                    margin-bottom: $margin-md;
+                }
+
+                p {
+                    line-height: $line-lg
+                }
+
+            }
+
+            .search__item-control {
+                @include flex-between-center();
+                gap: $gap-lg;
+                .wishlist {
+                    color: red !important;
+                }
+                .fa-heart {
+                    font-size: $font-lg;
+                    color: $secondary-font-color;
+                    cursor: pointer;
+                    transition: all 200ms linear;
+                    font-size: $font-xl;
+
+                    &:hover {
+                        color: $secondary-font-color-hover;
+                    }
+                }
+
+                a {
+                    text-decoration: none;
+                    background-color: $primary-btn-color;
+                    outline: none;
+                    border: 1px solid $primary-btn-color;
+                    cursor: pointer;
+                    color: $tertiary-font-color;
+                    text-transform: uppercase;
+                    padding: $padding-sm $padding-md;
+                    border-radius: 7px;
+                    font-weight: $weight-lg;
+                    transition: all 200ms linear;
+
+                    &:hover {
+                        background-color: $primary-btn-color-hover;
+                        border: 1px solid $primary-btn-color-hover;
+
+                    }
+                }
+            }
+
+        }
+    }
+
+    .search__notfound {
+        @include flex-center-center;
+        font-size: $font-2xl;
+        padding: $padding-xl 0;
+    }
+
+    .popup {
+        @include flex-between-center();
+        z-index: 999;
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        min-width: 200px;
+        height: 50px;
+        background-color: $tertiary-bg-color;
+        padding: 0 $padding-md;
+        border-radius: 7px;
+        cursor: pointer;
+    
+        p {
+            pointer-events: none;
+            font-weight: $weight-lg;
+            display: flex;
+            align-items: center;
+    
+            a {
+                margin: 0 $margin-md 0 $margin-xs;
+                color: $tertiary-font-color;
+                text-decoration: none;
+            }
+    
+            .fa-check {
+                @include flex-center-center();
+                background-color: green;
+                color: white;
+                width: 30px;
+                height: 30px;
+                font-size: 13px;
+                border-radius: 50%;
+            }
+    
+            
+        }
+        .fa-xmark {
+            @include flex-center-center();
+            background-color: red;
+            color: white;
+            width: 30px;
+            height: 30px;
+            font-size: 13px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+    }
+
+}
+
+@media (max-width:768px) {
+    #search {
+        .search__title {
+            font: {
+                size: $font-xl;
+                weight: $weight-xl;
+            }
+        }
+
+        .search__item {
+            flex-direction: column;
+            width: 100%;
+            box-sizing: border-box;
+
+            >a {
+                width: 100% !important;
+                height: 400px !important;
+
+                img {
+                    width: 100% !important;
+                    height: 100% !important;
+                    object-fit: cover;
+                }
+            }
+
+            .search__item-content {
+                width: 100% !important;
+                margin: $margin-lg 0;
+
+            }
+
+        }
+
+        .search__notfound {
+            font-size: $font-lg;
+            padding: $padding-xl 0;
+        }
+    }
+}
+
+@media (min-width:768px) and (max-width:992px) {
+    #search {
+
+        .search__finded {
+
+            .search__item {
+                gap: $gap-xl;
+
+                img {
+                    width: 170px;
+                    height: 250px;
+                }
+
+                .search__item-content {
+                    width: 70%;
+
+                    p {
+                        font-size: 13px;
+                    }
+
+                }
+
+                .search__item-control {
+                    gap: $gap-md;
+
+                    a {
+                        padding: $padding-sm $padding-sm;
+                        border-radius: 7px;
+                        transition: all 200ms linear;
+                        font-size: 13px;
+                        text-align: center;
+                        line-height: $line-md;
+                    }
+                }
+
+            }
+        }
+    }
+}

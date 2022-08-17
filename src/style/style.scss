@@ -1,0 +1,55 @@
+@import 'base/reset.scss';
+@import 'vendor/vendors.scss';
+@import 'sass-utils/utils.scss';
+
+html {
+    font: {
+        size: $font-size;
+        family: $primary-font-family;
+    }
+
+    body {
+        background-image: url('/src/resources/img/bg.jpg');
+        background-position: center !important;
+        background-size: cover !important;
+    }
+
+    .container {
+        width: $container-width;
+        margin: 0 auto;
+    }
+}
+
+
+@media (max-width:576px) {
+    html {
+        .container {
+            width: 100%;
+        }
+    }
+}
+
+
+@media (min-width: 576px) and (max-width:768px) {
+    html {
+        .container {
+            width: 540px;
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width:992px) {
+    html {
+        .container {
+            width: 720px;
+        }
+    }
+}
+
+@media (min-width: 992px) and (max-width:1200px) {
+    html {
+        .container {
+            width: 960px;
+        }
+    }
+}

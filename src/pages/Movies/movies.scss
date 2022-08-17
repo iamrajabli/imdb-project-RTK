@@ -1,0 +1,137 @@
+@import '../../style/style.scss';
+
+#movies {
+    margin-bottom: $margin-xl;
+    min-height: 100vh;
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .movies__wrapper {
+        padding: $padding-md;
+        box-sizing: border-box;
+
+        width: calc(100%/4);
+        height: 400px;
+        transition: all 200ms linear;
+        border-radius: 7px;
+
+        .movies__item {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border-radius: 7px;
+        }
+
+        &:hover .fa-heart {
+            opacity: 1;
+        }
+
+        &:hover .movies__wishlist {
+            background-color: rgba(0, 0, 0, .5);
+        }
+
+        &:hover .movies__content {
+            h2 {
+                color: $secondary-font-color;
+            }
+
+            .fa-star {
+                color: $tertiary-font-color  !important;
+            }
+        }
+
+        .movies__wishlist {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0);
+            transition: all 300ms linear;
+            border-radius: 7px;
+        }
+
+        .fa-heart {
+            position: absolute;
+            top: 10%;
+            right: 0;
+            transform: translate(-50%, -50%);
+            color: $secondary-font-color;
+            font-size: $font-2xl;
+            transition: all 300ms linear;
+            cursor: pointer;
+            opacity: 0;
+            z-index: 999;
+        }
+
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 7px;
+        }
+
+        .movies__content {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            background-color: rgba(0, 0, 0, 0);
+            z-index: 999;
+
+            h2 {
+                font: {
+                    size: $font-lg;
+                    weight: $weight-xl;
+                }
+
+                transition: all 300ms linear;
+                text-transform: uppercase;
+                color: $tertiary-font-color;
+            }
+
+            .movies_rating {
+                display: flex;
+                gap: $gap-sm;
+                font-size: $font-lg;
+                margin-top: $margin-md;
+
+                .fa-star {
+                    color: $secondary-font-color;
+                }
+
+                p {
+                    color: $tertiary-font-color;
+
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:576px) {
+    #movies {
+        .movies__wrapper {
+            width: 100%;
+        }
+    }
+}
+
+@media (min-width:576px) and (max-width:768px) {
+    #movies {
+        .movies__wrapper {
+            width: calc(100%/2);
+        }
+    }
+}
+
+@media (min-width:768px) and (max-width:992px) {
+    #movies {
+        .movies__wrapper {
+
+            width: calc(100%/3);
+        }
+    }
+}

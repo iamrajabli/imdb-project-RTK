@@ -1,0 +1,32 @@
+@import '../../style/style.scss';
+
+footer {
+    background-color: $tertiary-bg-color;
+    .container {
+        @include flex-between-center();
+        padding: $padding-md;
+        box-sizing: border-box;
+    }
+
+    .footer__left {
+        img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+        }
+    }
+
+    .footer__right {
+
+        p {
+            font-size: $font-md;
+            display: flex;
+            gap: $gap-sm;
+
+            a {
+                color: black;
+                font-weight: $weight-lg;
+            }
+        }
+    }
+}

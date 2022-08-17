@@ -1,0 +1,126 @@
+@import '../../style/style.scss';
+
+#sign {
+    min-height: 100vh;
+    @include flex-center-center();
+
+    .container {
+        @include flex-center-center();
+        padding: $padding-md;
+        box-sizing: border-box;
+    }
+
+    .sign__content {
+        width: 400px;
+
+        .sign__title {
+            font: {
+                size: $font-xl;
+                weight: $weight-lg;
+            }
+
+            margin-bottom: $margin-md;
+
+            text-align: center;
+            color: $secondary-font-color;
+            text-transform: uppercase;
+        }
+
+        .sign__status {
+            margin: $margin-md 0;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 7px;
+            color: $tertiary-font-color;
+            line-height: $line-lg;
+
+            a {
+                color: $tertiary-font-color;
+                font-weight: $weight-lg;
+            }
+        }
+
+        .success {
+            background-color: $tertiary-btn-color;
+        }
+
+        .error {
+            background-color: $primary-btn-color;
+        }
+
+        .errorBorder {
+            border: 1px solid rgb(255, 0, 0) !important
+        }
+
+        .successBorder {
+            border: 1px solid rgb(0, 255, 0) !important
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: $gap-md;
+
+
+            input,
+            button {
+                width: 100%;
+                box-sizing: border-box;
+                height: 40px;
+                border: none;
+                outline: none;
+                border-radius: 7px;
+                font-family: $primary-font-family;
+            }
+
+            button {
+                text-transform: uppercase;
+                background-color: $tertiary-bg-color;
+                cursor: pointer;
+                transition: all 200ms linear;
+
+                font: {
+                    size: $font-md;
+                    weight: $weight-lg;
+                }
+
+                &:hover {
+                    background-color: $secondary-bg-color;
+                    color: $tertiary-font-color;
+                }
+            }
+
+
+            input {
+                border: 1px solid white;
+                padding: 0 $padding-md;
+
+                &::placeholder {
+                    color: $primary-font-color;
+                    font-family: $primary-font-family;
+                }
+            }
+
+            input,
+            input::placeholder {
+                font-size: $font-md;
+            }
+
+        }
+
+        .sign__other {
+            text-align: right;
+            margin-top: $margin-md;
+
+            a {
+                color: $tertiary-font-color;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .bg-white {
+        background-color: white;
+    }
+}

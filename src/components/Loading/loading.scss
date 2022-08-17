@@ -1,0 +1,13 @@
+.loading {
+    background-color: yellow;
+    text-align: center;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+
+    img {
+        z-index: 999;
+        height: 200px;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+    }
+}

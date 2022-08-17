@@ -1,0 +1,93 @@
+@import '../../style/style.scss';
+
+#movie {
+    min-height: 80vh;
+    padding: $padding-xl 0;
+
+    img {
+        border-radius: 7px
+    }
+
+    .container {
+        @include flex-between-center();
+        gap: $gap-3xl;
+        padding: $padding-md;
+        box-sizing: border-box;
+    }
+
+    .movie__left {
+        position: relative;
+        border-radius: 7px;
+        cursor: pointer;
+
+        img {
+            width: 300px;
+            height: 450px;
+            object-fit: cover;
+        }
+
+    }
+
+    .movie__right {
+
+        h2 {
+            font: {
+                size: $font-xl;
+                weight: $weight-xl;
+            }
+
+            text-transform: uppercase;
+            color: $tertiary-font-color;
+        }
+
+        p {
+            color: $tertiary-font-color;
+            margin: $margin-md 0;
+            line-height: $line-lg;
+            width: 70%;
+        }
+
+        .movie_rating {
+            display: flex;
+            align-items: center;
+            gap: $gap-sm;
+            font-size: $font-lg;
+
+            .fa-star {
+                color: $secondary-font-color;
+            }
+
+
+        }
+    }
+}
+
+@media (max-width:768px) {
+    #movie {
+
+        .container {
+            flex-direction: column;
+        }
+
+        .movie__right {
+
+            p {
+                width: 100%;
+            }
+
+        }
+    }
+}
+
+@media (min-width:768px) and (max-width:992px) {
+    #movie {
+        .movie__right {
+
+            p {
+                font-size: 14px;
+                width: 100%;
+            }
+
+        }
+    }
+}

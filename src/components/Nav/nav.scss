@@ -1,0 +1,102 @@
+@import '../../style/style.scss';
+
+nav {
+    background-color: $primary-bg-color;
+
+    .container {
+        @include flex-between-center();
+        padding: $padding-md;
+        box-sizing: border-box;
+    }
+
+    .nav__left {
+        img {
+            width: 100px;
+            height: 90px;
+        }
+    }
+
+    .nav__right {
+        ul {
+            display: flex;
+            gap: $gap-lg;
+
+            a {
+                color: $primary-font-color;
+                text-decoration: none;
+                transition: all 200ms linear;
+
+                &:hover {
+                    color: $primary-font-color-hover;
+                }
+
+                &:active {
+                    color: $secondary-font-color;
+                }
+
+            }
+
+        }
+
+        .fa-bars-staggered {
+            display: none;
+            color: $tertiary-font-color;
+            font-size: $font-xl;
+            transition: all 200ms linear;
+        }
+    }
+
+
+    .active {
+        color: $secondary-font-color;
+    }
+
+    .d-flex {
+        display: flex !important;
+    }
+
+    .rotate {
+        transform: rotate(180deg) !important;
+    }
+}
+
+@media (max-width:768px) {
+    nav {
+        position: relative;
+
+        .nav__left {
+            img {
+                width: 80px;
+                height: 70px;
+            }
+        }
+        .nav__right {
+            ul {
+                display: none;
+                position: absolute;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: $tertiary-bg-color;
+                padding: $padding-lg 0;
+                z-index: 999;
+
+                a {
+                    color: black;
+                    font-weight: $weight-lg;
+                }
+
+                .active {
+                    color: $tertiary-font-color;
+                }
+            }
+
+            .fa-bars-staggered {
+                display: block;
+            }
+        }
+    }
+}
