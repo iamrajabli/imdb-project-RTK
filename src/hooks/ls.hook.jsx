@@ -56,7 +56,6 @@ const useLocalStorage = () => {
                 wishlist = user.wishlist
             }
         })
-
         return wishlist
     }
 

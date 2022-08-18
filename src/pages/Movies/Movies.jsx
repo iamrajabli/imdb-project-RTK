@@ -13,11 +13,8 @@ const Movies = () => {
     const { getWishlistLocalStorage } = useLocalStorage();
 
     useEffect(() => {
-        getWishlistLocalStorage('users', getSessionStorage('current'))
-            .forEach(wishlist => dispatch(setWishlist(wishlist)))
+        dispatch(setWishlist(getWishlistLocalStorage('users', getSessionStorage('current'))))
     }, [])
-
-    
 
 
     return (
