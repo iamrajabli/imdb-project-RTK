@@ -59,8 +59,26 @@ const useLocalStorage = () => {
         return wishlist
     }
 
+    const deleteMovieFromWishlistLocalStorage = (title, currentUser, movieID) => {
+        const data = getLocalStorage(title)
 
-    return { setLocalStorage, loginControlLocalStorage, setWishlistLocalStorage, getWishlistLocalStorage }
+        data.forEach(user => {
+            if (user.username === currentUser) {
+                user.wishlist = user.wishlist.filter(movie => movie.id !== movieID)
+            }
+        })
+
+        localStorage.setItem(title, JSON.stringify(data))
+    }
+
+
+    return {
+        setLocalStorage,
+        loginControlLocalStorage,
+        setWishlistLocalStorage,
+        getWishlistLocalStorage,
+        deleteMovieFromWishlistLocalStorage
+    }
 
 }
 

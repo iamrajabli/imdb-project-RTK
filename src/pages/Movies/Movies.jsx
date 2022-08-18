@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setWishlist } from "./MoviesSlice";
+import { setWishlist, deleteWishlist } from "./MoviesSlice";
 import useSessionStorage from '../../hooks/ss.hook';
 import useLocalStorage from '../../hooks/ls.hook';
 import { Link } from "react-router-dom";
@@ -10,12 +10,16 @@ const Movies = () => {
     const { wishlist } = useSelector(state => state.movies);
     const dispatch = useDispatch();
     const { getSessionStorage } = useSessionStorage();
-    const { getWishlistLocalStorage } = useLocalStorage();
+    const { getWishlistLocalStorage, deleteMovieFromWishlistLocalStorage } = useLocalStorage();
 
     useEffect(() => {
         dispatch(setWishlist(getWishlistLocalStorage('users', getSessionStorage('current'))))
     }, [])
 
+    const onDelete = (id) => {
+        dispatch(deleteWishlist(id))
+        deleteMovieFromWishlistLocalStorage('users', getSessionStorage('current'), id)
+    }
 
     return (
         <section id="movies">
@@ -33,7 +37,7 @@ const Movies = () => {
                                     <p>8.43</p>
                                 </div>
                             </div>
-                            <i className="fa-solid fa-heart" onClick={() => deleteFromWishlist(id)}></i>
+                            <i className="fa-solid fa-heart" onClick={() => onDelete(id)}></i>
 
                             <Link to={`/movie/${id}`}>
                                 <div className="movies__wishlist">
