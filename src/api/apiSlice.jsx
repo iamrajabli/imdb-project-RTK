@@ -13,10 +13,13 @@ export const apiSlice = createApi({
     tagTypes: ["Movies"],
     endpoints: (builder) => ({
         getMovie: builder.query({
+            query: (id) => `/${id}`
+        }),
+        getFindedMovies: builder.query({
             query: (title) => `/${title}`,
             providesTags: ["Movies"]
         })
     })
 });
 
-export const { useGetMovieQuery } = apiSlice;
+export const { useGetFindedMoviesQuery, useGetMovieQuery } = apiSlice;

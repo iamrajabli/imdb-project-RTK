@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useGetMovieQuery } from "../../api/apiSlice"
+import { useGetFindedMoviesQuery } from "../../api/apiSlice"
 import { Link } from "react-router-dom";
 import { Loading } from '../../components/Loading';
 import { Error } from '../../components/Error';
@@ -50,7 +50,7 @@ const Result = ({ title }) => {
         data: movies,
         isFetching,
         isError
-    } = useGetMovieQuery(title);
+    } = useGetFindedMoviesQuery(title);
 
 
     if (isFetching) {
