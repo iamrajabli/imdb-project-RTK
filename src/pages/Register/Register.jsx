@@ -1,8 +1,23 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useLocalStorage from '../../hooks/ls.hook';
+import { v4 as uuid } from 'uuid';
 
 const Register = () => {
 
- 
+    const [form, setForm] = useState({});
+    const { setLocalStorage } = useLocalStorage();
+
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value, wishlist: [] });
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setLocalStorage('users', { ...form, id: uuid() });
+    }
+
     // Массив полей
     const inputs = [
         { name: 'email', type: 'email', placeholder: 'Enter email' },
@@ -17,16 +32,18 @@ const Register = () => {
                     <div className="sign__title">
                         <h1>Sign Up</h1>
                     </div>
-                  
+
                     <form onSubmit={(e) => handleSubmit(e)}>
                         {inputs.map((input, i) => (
                             <input
+                                onChange={(e) => handleChange(e)}
                                 key={i}
+                                value={form.name}
                                 name={input.name}
                                 type={input.type}
                                 placeholder={input.placeholder} />
                         ))}
-                        <button >Sign up</button>
+                        <button>Sign up</button>
                     </form>
                     <div className="sign__other">
                         <Link to="/login">I have an account</Link>

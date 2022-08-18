@@ -1,8 +1,34 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import useLocalStorage from '../../hooks/ls.hook';
+import useSessionStorage from '../../hooks/ss.hook';
+
 
 const Login = () => {
+    const { loginControlLocalStorage } = useLocalStorage();
+    const { setSessionStorage } = useSessionStorage();
 
-   
+
+    const [form, setForm] = useState({});
+    const history = useHistory();
+
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value })
+    }
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const status = loginControlLocalStorage('users', form);
+
+        if (status) {
+            setSessionStorage('current', form.username)
+            history.push('/')
+        }
+    }
+
     // Массив полей
     const inputs = [
         { name: 'username', type: 'text', placeholder: 'Enter username' },
@@ -21,6 +47,8 @@ const Login = () => {
                     <form onSubmit={(e) => handleSubmit(e)}>
                         {inputs.map((input, i) => (
                             <input
+                                onChange={(e) => handleChange(e)}
+                                value={form.name}
                                 key={i}
                                 name={input.name}
                                 type={input.type}
