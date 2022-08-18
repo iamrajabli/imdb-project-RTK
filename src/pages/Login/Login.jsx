@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
@@ -11,21 +12,70 @@ const Login = () => {
 
 
     const [form, setForm] = useState({});
+    const [wrongPassStatus, setWrongStatusPass] = useState(false);
+    const inputsRef = useRef([]);
     const history = useHistory();
 
 
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value })
+        const input = e.target;
+
+        setForm({ ...form, [input.name]: input.value })
+
+        formValidation(input)
+    }
+
+    // yazdigi anda validate
+    const formValidation = (input) => {
+        if (input.value === '') {
+            builderInputStatus(true, input)
+        } else {
+            builderInputStatus(false, input)
+        }
+    }
+
+    // builder status
+    const builderInputStatus = (status, input) => {
+        if (status) { // error
+            input.classList.remove('successBorder')
+            input.classList.add('errorBorder')
+        } else { // success
+            input.classList.add('successBorder')
+            input.classList.remove('errorBorder')
+        }
+
+        return status
+    }
+
+    // submit edilende empty validate
+    const emptyValidate = (inputsRef) => {
+        let status;
+
+        for (let input of inputsRef.current) {
+            if (input.value !== '') {
+                status = builderInputStatus(false, input);
+            } else {
+                status = builderInputStatus(true, input);
+            }
+        }
+
+        return status;
     }
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const status = loginControlLocalStorage('users', form);
 
-        if (status) {
+        const statusPass = loginControlLocalStorage('users', form);
+        const statusEmpty = emptyValidate(inputsRef);
+
+        if (statusEmpty) return;
+
+        if (statusPass) {
             setSessionStorage('current', form.username)
-            history.push('/')
+            history.push('/');
+        } else {
+            setWrongStatusPass(true)
         }
     }
 
@@ -35,8 +85,7 @@ const Login = () => {
         { name: 'pass', type: 'password', placeholder: 'Enter pass' },
     ]
 
-
-
+    const wrongPassContent = wrongPassStatus ? <ErrorPop /> : null;
     return (
         <section id="sign">
             <div className="container">
@@ -45,11 +94,13 @@ const Login = () => {
                         <h1>sign in</h1>
                     </div>
                     <form onSubmit={(e) => handleSubmit(e)}>
+                        {wrongPassContent}
                         {inputs.map((input, i) => (
                             <input
+                                ref={e => inputsRef.current[i] = e}
+                                key={i}
                                 onChange={(e) => handleChange(e)}
                                 value={form.name}
-                                key={i}
                                 name={input.name}
                                 type={input.type}
                                 placeholder={input.placeholder} />
