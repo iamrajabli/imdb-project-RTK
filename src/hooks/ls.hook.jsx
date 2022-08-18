@@ -35,6 +35,19 @@ const useLocalStorage = () => {
         return status;
     }
 
+    const registerControlLocalStorage = (title, body) => {
+        const data = getLocalStorage(title);
+        let status = true;
+
+        data.forEach(user => {
+            if (user.username === body.username || user.email === body.email) {
+                status = false;
+            }
+        })
+
+        return status
+    }
+
     const setWishlistLocalStorage = (title, currentUser, body) => {
         const data = getLocalStorage(title);
 
@@ -77,7 +90,8 @@ const useLocalStorage = () => {
         loginControlLocalStorage,
         setWishlistLocalStorage,
         getWishlistLocalStorage,
-        deleteMovieFromWishlistLocalStorage
+        deleteMovieFromWishlistLocalStorage,
+        registerControlLocalStorage
     }
 
 }

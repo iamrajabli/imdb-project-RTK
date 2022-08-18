@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
 const Register = () => {
 
     const [form, setForm] = useState({});
-    const { setLocalStorage } = useLocalStorage();
+    const { setLocalStorage, registerControlLocalStorage } = useLocalStorage();
 
 
     const handleChange = (e) => {
@@ -15,7 +15,13 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setLocalStorage('users', { ...form, id: uuid() });
+        const status = registerControlLocalStorage('users', form);
+
+        if (status) {
+            setLocalStorage('users', { ...form, id: uuid() });
+        }else {
+            console.log('error');
+        }
     }
 
     // Массив полей
