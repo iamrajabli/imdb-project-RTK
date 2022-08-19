@@ -37,11 +37,16 @@ const useLocalStorage = () => {
 
     const registerControlLocalStorage = (title, body) => {
         const data = getLocalStorage(title);
-        let status = true;
+        let status = { status: false, mes:'' };
+
 
         data.forEach(user => {
-            if (user.username === body.username || user.email === body.email) {
-                status = false;
+            if (user.email === body.email && user.username === body.username) {
+                status = { status: true, mes: 'This username and email is registered' };
+            } else if (user.username === body.username) {
+                status = { status: true, mes: 'This username is registered' };
+            } else if (user.email === body.email) {
+                status = { status: true, mes: 'This email is registered' };
             }
         })
 

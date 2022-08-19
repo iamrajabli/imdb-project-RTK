@@ -1,36 +1,56 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import useLocalStorage from '../../hooks/ls.hook';
 import { v4 as uuid } from 'uuid';
+import { useFormValidator, useLocalStorage } from '../../hooks';
 
 const Register = () => {
 
-    const [form, setForm] = useState({});
-    const { setLocalStorage, registerControlLocalStorage } = useLocalStorage();
-
+    const [form, setForm] = useState({}),
+        [alreadyStatus, setAlreadyStatus] = useState({}),
+        [registerStatus, setRegisterStatus] = useState(false),
+        { setLocalStorage, registerControlLocalStorage } = useLocalStorage(),
+        { formValidation, emptyValidate, inputsRef } = useFormValidator();
 
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value, wishlist: [] });
+        const input = e.target;
+        setForm({ ...form, [input.name]: input.value, wishlist: [] });
+
+        formValidation(input)
+
     }
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const status = registerControlLocalStorage('users', form);
+        const statusEmpty = emptyValidate(inputsRef);
 
-        if (status) {
-            setLocalStorage('users', { ...form, id: uuid() });
-        }else {
-            console.log('error');
+        if (!statusEmpty) {
+            const statusAlready = registerControlLocalStorage('users', form);
+
+            if (!statusAlready.status) {
+                setLocalStorage('users', { ...form, id: uuid() });
+                setRegisterStatus(true)
+            } else {
+                setRegisterStatus(false)
+            }
+
+            setAlreadyStatus(statusAlready)
         }
+
     }
 
     // Массив полей
     const inputs = [
         { name: 'email', type: 'email', placeholder: 'Enter email' },
         { name: 'username', type: 'text', placeholder: 'Enter username' },
-        { name: 'pass', type: 'password', placeholder: 'Enter pass' },
-        { name: 'repass', type: 'password', placeholder: 'Confirm pass' },
+        { name: 'pass', type: 'password', placeholder: 'Enter pass' }
     ]
+
+
+
+    const alreadyContent = alreadyStatus.status ? <AvialablePop already={alreadyStatus.mes} /> : null;
+    const registerContent = registerStatus ? <SuccessPop /> : null;
+
     return (
         <section id="sign">
             <div className="container">
@@ -40,11 +60,13 @@ const Register = () => {
                     </div>
 
                     <form onSubmit={(e) => handleSubmit(e)}>
+                        {alreadyContent}
+                        {registerContent}
                         {inputs.map((input, i) => (
                             <input
-                                onChange={(e) => handleChange(e)}
+                                ref={e => inputsRef.current[i] = e}
                                 key={i}
-                                value={form.name}
+                                onChange={(e) => handleChange(e)}
                                 name={input.name}
                                 type={input.type}
                                 placeholder={input.placeholder} />
@@ -60,13 +82,6 @@ const Register = () => {
     )
 }
 
-const PassPop = () => {
-    return (
-        <div className="sign__status error">
-            <p>Passwords must be the same!</p>
-        </div>
-    )
-}
 
 const SuccessPop = () => {
     return (
