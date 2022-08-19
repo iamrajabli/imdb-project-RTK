@@ -9,3 +9,7 @@
 <hr>
 
 ![3](/src/resources/gitUI/3.png)
+
+<hr>
+
+![4](/src/resources/gitUI/4.png)

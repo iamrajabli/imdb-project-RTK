@@ -1,5 +1,11 @@
-import { Link } from "react-router-dom"
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useFormValidator, useLocalStorage, useSessionStorage } from '../../hooks';
+
 const Account = () => {
+
+    const [form, setForm] = useState({}),
+        { formValidation, emptyValidate, inputsRef } = useFormValidator()
 
     // Массив полей
     const inputs = [
