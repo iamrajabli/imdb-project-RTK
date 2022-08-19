@@ -64,27 +64,5 @@ const Result = ({ title }) => {
 }
 
 
-const Success = ({ hide }) => {
-
-    return (
-        <section onClick={hide} className="popup">
-            <p>Added to <Link to="/wishlist">Wishlist</Link>
-                <i className="fa-solid fa-check"></i>
-            </p>
-        </section>
-    )
-}
-
-const ErrorPop = ({ hide }) => {
-
-    return (
-        <section onClick={hide} className="popup">
-            <p> This movie has been selected
-                <i className="fa-solid fa-xmark"></i>
-            </p>
-        </section>
-    )
-}
-
 
 export default Home;

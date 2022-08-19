@@ -37,7 +37,7 @@ const useLocalStorage = () => {
 
     const registerControlLocalStorage = (title, body) => {
         const data = getLocalStorage(title);
-        let status = { status: false, mes:'' };
+        let status = { status: false, mes: '' };
 
 
         data.forEach(user => {
@@ -77,6 +77,23 @@ const useLocalStorage = () => {
         return wishlist
     }
 
+    const wishlistControlLocalStorage = (title, currentUser, movieID) => {
+        const data = getLocalStorage(title)
+        let status = false;
+        data.forEach(user => {
+            if (user.username === currentUser) {
+                user.wishlist.forEach(movie => {
+                    if (movie.id === movieID) {
+                        status = true
+                    }
+                });
+            }
+        });
+
+        return status;
+
+    }
+
     const deleteMovieFromWishlistLocalStorage = (title, currentUser, movieID) => {
         const data = getLocalStorage(title)
 
@@ -95,6 +112,7 @@ const useLocalStorage = () => {
         loginControlLocalStorage,
         setWishlistLocalStorage,
         getWishlistLocalStorage,
+        wishlistControlLocalStorage,
         deleteMovieFromWishlistLocalStorage,
         registerControlLocalStorage
     }
